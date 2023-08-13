@@ -18,6 +18,11 @@ pipeline {
             steps {
                 sh './gradlew jacocoTestReport'
             }
+            post {
+                always {
+                    jacoco(path: '**/build/jacoco/testDebugUnitTest.exec')
+                }
+            }
         
         }
 
@@ -25,11 +30,6 @@ pipeline {
             steps {
                  sh './gradlew ktlintCheck'
                  }
-                    post {
-                        always {
-                            recordIssues tool: kotlin(name: 'ktlint'), pattern: 'app/build/reports/ktlint/ktlint*.txt' // Adjust the pattern according to your project structure
-                        }
-                    }
-                }
+            }
     }
 }
