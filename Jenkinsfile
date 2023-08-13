@@ -20,10 +20,7 @@ pipeline {
             }
             post {
                 always {
-                    // Specify the path to the JaCoCo XML report
-                    jacoco(executionDataPath: '**/build/jacoco/test.exec', 
-                           classPattern: '**/classes', 
-                           sourcePattern: '**/src/main/java')
+                    jacoco(path: '**/build/jacoco/testDebugUnitTest.exec')
                 }
             }
         }
