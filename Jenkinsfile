@@ -4,14 +4,12 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                // Your build commands
                 sh './gradlew assembleDebug'
             }
         }
 
         stage('Test') {
             steps {
-                // Your test commands
                 sh './gradlew test'
             }
         }
@@ -22,12 +20,12 @@ pipeline {
             }
             post {
                 always {
-                    jacoco()
+                    // Specify the path to the JaCoCo XML report
+                    jacoco(executionDataPath: '**/build/jacoco/test.exec', 
+                           classPattern: '**/classes', 
+                           sourcePattern: '**/src/main/java')
                 }
             }
         }
-
-
-        // Additional stages for coverage and static analysis will go here
     }
 }
