@@ -26,7 +26,7 @@ import com.example.patientappcompose.domain.model.patients.PatientDataModel
 import com.example.patientappcompose.ui.composable.components.CustomRatingBar
 
 @Composable
-fun DetailsPatientContainer(patient:PatientDataModel?) {
+fun DetailsPatientContainer(patient: PatientDataModel?) {
     val image: Painter = rememberAsyncImagePainter(model = patient!!.photo)
 
     ConstraintLayout(modifier = Modifier.fillMaxSize()) {
@@ -75,8 +75,9 @@ fun DetailsPatientContainer(patient:PatientDataModel?) {
         Box(
             modifier = Modifier.size(30.dp).constrainAs(ratingBar) {
                 bottom.linkTo(viewBackground.bottom, margin = 10.dp)
-                start.linkTo(cardViewImage.end, margin = 10.dp) }
-        ){
+                start.linkTo(cardViewImage.end, margin = 10.dp)
+            }
+        ) {
             CustomRatingBar(
                 modifier = Modifier.fillMaxSize().scale(0.8f),
                 rating = 4f,
@@ -99,7 +100,7 @@ fun DetailsPatientContainer(patient:PatientDataModel?) {
             color = Color.DarkGray,
             modifier = Modifier.constrainAs(tvAboutInfo) {
                 top.linkTo(tvAbout.bottom, margin = 10.dp)
-                start.linkTo(tvAbout.start,margin = 6.dp)
+                start.linkTo(tvAbout.start, margin = 6.dp)
                 end.linkTo(parent.end, margin = 5.dp)
                 width = Dimension.fillToConstraints
             }

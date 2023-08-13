@@ -4,9 +4,9 @@ import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 
 @JsonClass(generateAdapter = true)
-data class DeletePatientRemoteModel (
+data class DeletePatientRemoteModel(
     @Json(name = "status")
-    val status:Int,
+    val status: Int,
     @Json(name = "message")
-    val message:String,
+    val message: String
 )

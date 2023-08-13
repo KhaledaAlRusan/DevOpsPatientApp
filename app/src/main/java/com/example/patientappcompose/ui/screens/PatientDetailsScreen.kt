@@ -16,16 +16,16 @@ import com.example.patientappcompose.ui.features.details.DetailsViewModel
 fun DetailPatientScreen(
     navController: NavController,
     patientId: String = rememberSaveable {
-    navController.currentBackStackEntry?.arguments?.getString("patientId").toString()
-},
-    viewModel: DetailsViewModel = hiltViewModel(),
+        navController.currentBackStackEntry?.arguments?.getString("patientId").toString()
+    },
+    viewModel: DetailsViewModel = hiltViewModel()
 ) {
     val patient by viewModel.detailsSuccessStateFlow.collectAsState()
     val loading = viewModel.loadingStateFlow.collectAsState().value
     val error = viewModel.errorStateFlow.collectAsState().value
 
     LaunchedEffect(patientId) {
-        if(patientId != "null") { // checking if patientId is not null
+        if (patientId != "null") { // checking if patientId is not null
             viewModel.details(patientId)
         }
     }
@@ -40,4 +40,3 @@ fun DetailPatientScreen(
         ErrorMessage(error = error)
     }
 }
-

@@ -27,7 +27,7 @@ import com.example.patientappcompose.ui.composable.components.EditText
 
 @Composable
 fun AddPatientContainer(
-    onAddClicked:(list:MutableList<String>) ->Unit
+    onAddClicked: (list: MutableList<String>) -> Unit
 ) {
     val state = rememberScrollState()
     var name by remember { mutableStateOf("") }
@@ -62,14 +62,14 @@ fun AddPatientContainer(
                     .padding(top = 35.dp)
                     .clip(RoundedCornerShape(50))
             )
-            EditText(header = "Name", text = name, onTextChanged = {name = it})
-            EditText(header = "Email", text = email, onTextChanged = {email = it})
-            EditText(header = "Address", text = address, onTextChanged = {address = it})
-            EditText(header = "Birthdate", text = birthdate, onTextChanged = {birthdate = it})
-            EditText(header = "Gender", text = gender, onTextChanged = {gender = it})
-            EditText(header = "Mobile", text = mobile, onTextChanged = {mobile = it})
+            EditText(header = "Name", text = name, onTextChanged = { name = it })
+            EditText(header = "Email", text = email, onTextChanged = { email = it })
+            EditText(header = "Address", text = address, onTextChanged = { address = it })
+            EditText(header = "Birthdate", text = birthdate, onTextChanged = { birthdate = it })
+            EditText(header = "Gender", text = gender, onTextChanged = { gender = it })
+            EditText(header = "Mobile", text = mobile, onTextChanged = { mobile = it })
             AddButton(valid = isFormValid) {
-                onAddClicked(listOf(name,email,address,birthdate,gender,mobile) as MutableList<String>)
+                onAddClicked(listOf(name, email, address, birthdate, gender, mobile) as MutableList<String>)
             }
         }
     }

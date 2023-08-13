@@ -2,7 +2,6 @@ package com.example.patientappcompose.ui.features.details
 
 import android.util.Log
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -15,9 +14,9 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class DetailsViewModel @Inject constructor(private val repo: PatientRepo): ViewModel() {
+class DetailsViewModel @Inject constructor(private val repo: PatientRepo) : ViewModel() {
 
-    private val _detailsSuccessStateFlow:MutableStateFlow<PatientDataModel?> = MutableStateFlow(null)
+    private val _detailsSuccessStateFlow: MutableStateFlow<PatientDataModel?> = MutableStateFlow(null)
     val detailsSuccessStateFlow = _detailsSuccessStateFlow.asStateFlow()
 
     private val _loadingMutableStateFlow: MutableStateFlow<Boolean> = MutableStateFlow(false)
@@ -31,9 +30,8 @@ class DetailsViewModel @Inject constructor(private val repo: PatientRepo): ViewM
             _loadingMutableStateFlow.emit(true)
             try {
                 _detailsSuccessStateFlow.emit(repo.detailsPatient(id))
-                Log.d("working!","Working")
-            }
-            catch (e:Exception){
+                Log.d("working!", "Working")
+            } catch (e: Exception) {
                 _errorMutableStateFlow.emit(e)
             }
             _loadingMutableStateFlow.emit(false)

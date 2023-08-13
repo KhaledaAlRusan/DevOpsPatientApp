@@ -14,14 +14,13 @@ import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import javax.inject.Singleton
 
-
 @Module
 @InstallIn(SingletonComponent::class)
 object NetworkModule {
 
     @Provides
     @Singleton
-    fun provideRetrofit(factory: Factory):Retrofit{
+    fun provideRetrofit(factory: Factory): Retrofit {
         return Retrofit.Builder()
             .baseUrl(baseUrl)
             .addConverterFactory(factory)
@@ -30,7 +29,7 @@ object NetworkModule {
 
     @Provides
     @Singleton
-    fun providePatients(retrofit: Retrofit):PatientDataSource{
+    fun providePatients(retrofit: Retrofit): PatientDataSource {
         return retrofit.create(PatientDataSource::class.java)
     }
 
@@ -44,7 +43,7 @@ object NetworkModule {
 
     @Provides
     @Reusable
-    fun provideConverterFactory(moshi: Moshi):Factory{
+    fun provideConverterFactory(moshi: Moshi): Factory {
         return MoshiConverterFactory.create(moshi)
     }
 }

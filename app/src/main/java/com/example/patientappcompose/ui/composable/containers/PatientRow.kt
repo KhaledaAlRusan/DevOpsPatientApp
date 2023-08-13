@@ -33,11 +33,11 @@ fun PatientRow(
     record: PatientDataModel,
     modifier: Modifier = Modifier,
     selectedPatientId: String?,
-    onClick:() ->Unit = {},
+    onClick: () -> Unit = {},
     onDelete: () -> Unit = {}
-){
+) {
     val isSelected = selectedPatientId == record.id
-    Box(modifier = Modifier.wrapContentSize()){
+    Box(modifier = Modifier.wrapContentSize()) {
         Card(
             modifier = modifier.wrapContentHeight().clickable {
                 onClick()
@@ -45,15 +45,14 @@ fun PatientRow(
             shape = RoundedCornerShape(16.dp),
             colors = selected(isSelected)
         ) {
-
             Column(
                 horizontalAlignment = Alignment.CenterHorizontally,
                 modifier = Modifier.padding(8.dp)
             ) {
                 Image(
-                    painter = rememberAsyncImagePainter(model = record.photo ),
+                    painter = rememberAsyncImagePainter(model = record.photo),
                     contentDescription = "Patient Image",
-                    modifier = Modifier.aspectRatio(4f/3f)
+                    modifier = Modifier.aspectRatio(4f / 3f)
                 )
                 VerticalSpacer(size = 8)
                 Text(text = record.name)
@@ -62,29 +61,28 @@ fun PatientRow(
                 Text(text = record.birthdate)
                 VerticalSpacer(size = 8)
                 Text(text = record.condition)
-
             }
         }
         Image(
-            painter = painterResource( R.drawable.ic_delete),
+            painter = painterResource(R.drawable.ic_delete),
             contentDescription = "Delete Item",
             modifier = Modifier.align(Alignment.TopEnd).padding(16.dp).clickable { onDelete() }
         )
     }
 }
+
 @Composable
-fun selected(clicked: Boolean):CardColors{
-    return if (clicked){
+fun selected(clicked: Boolean): CardColors {
+    return if (clicked) {
         CardDefaults.cardColors(containerColor = darkBlue)
-    }
-    else{
+    } else {
         CardDefaults.cardColors(containerColor = brightBlue)
     }
 }
 
 @Composable
 @Preview(showSystemUi = true)
-fun PreviewPatientRow(){
+fun PreviewPatientRow() {
     val patientData = PatientDataModel(
         address = "123 Main St",
         birthdate = "1990-01-01",

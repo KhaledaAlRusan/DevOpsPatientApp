@@ -1,6 +1,5 @@
 package com.example.patientappcompose.ui.features.delete
 
-
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.patientappcompose.data.repo.PatientRepo
@@ -12,10 +11,10 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class DeleteViewModel @Inject constructor(private val repo: PatientRepo): ViewModel() {
+class DeleteViewModel @Inject constructor(private val repo: PatientRepo) : ViewModel() {
 
     private val _deletePatientStateFlow: MutableStateFlow<DeletePatientRemoteModel?> = MutableStateFlow(null)
-    val deletePatientStateFlow : MutableStateFlow<DeletePatientRemoteModel?> = _deletePatientStateFlow
+    val deletePatientStateFlow: MutableStateFlow<DeletePatientRemoteModel?> = _deletePatientStateFlow
 
     private val _loadingMutableStateFlow: MutableStateFlow<Boolean> = MutableStateFlow(false)
     val loadingStateFlow = _loadingMutableStateFlow.asStateFlow()
@@ -23,14 +22,12 @@ class DeleteViewModel @Inject constructor(private val repo: PatientRepo): ViewMo
     private val _errorMutableStateFlow: MutableStateFlow<Exception?> = MutableStateFlow(null)
     val errorStateFlow = _errorMutableStateFlow.asStateFlow()
 
-    fun deletePatient(id:String){
+    fun deletePatient(id: String) {
         viewModelScope.launch {
             _loadingMutableStateFlow.emit(true)
             try {
                 _deletePatientStateFlow.emit(repo.deletePatient(id))
-            }
-            catch (e:Exception)
-            {
+            } catch (e: Exception) {
                 _errorMutableStateFlow.emit(e)
             }
             _loadingMutableStateFlow.emit(false)

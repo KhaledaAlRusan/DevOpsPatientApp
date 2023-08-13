@@ -8,19 +8,19 @@ import javax.inject.Inject
 
 class PatientRepo @Inject constructor(private val dataSource: PatientDataSource) {
 
-    suspend fun getPatients():List<PatientDataModel>{
+    suspend fun getPatients(): List<PatientDataModel> {
         return dataSource.getPatients().data
     }
 
-    suspend fun addPatient(addPatientModel: AddPatientModel):PatientDataModel{
+    suspend fun addPatient(addPatientModel: AddPatientModel): PatientDataModel {
         return dataSource.addPatient(addPatientModel)
     }
 
-    suspend fun deletePatient(id:String):DeletePatientRemoteModel{
+    suspend fun deletePatient(id: String): DeletePatientRemoteModel {
         return dataSource.deletePatient(id)
     }
 
-    suspend fun detailsPatient(id:String): PatientDataModel {
+    suspend fun detailsPatient(id: String): PatientDataModel {
         return dataSource.getPatient(id).data
     }
 }

@@ -1,6 +1,5 @@
 package com.example.patientappcompose.ui.screens
 
-
 import android.widget.Toast
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -17,7 +16,7 @@ import com.example.patientappcompose.ui.navigator.Screens
 
 @Composable
 fun AddPatientScreen(
-    navController : NavController? = null
+    navController: NavController? = null
 ) {
     val viewModel: AddPatientViewModel = hiltViewModel()
     val success = viewModel.addPatientsStateFlow.collectAsState().value
@@ -28,7 +27,12 @@ fun AddPatientScreen(
     AddPatientContainer {
         viewModel.addPatient(
             AddPatientModel(
-                it[0],it[1],it[2],it[3],it[4],it[5],
+                it[0],
+                it[1],
+                it[2],
+                it[3],
+                it[4],
+                it[5]
             )
         )
     }
@@ -38,11 +42,10 @@ fun AddPatientScreen(
             navController?.popBackStack(Screens.MainScreen.route, false)
         }
     }
-    if (loading){
+    if (loading) {
         CircularBar()
     }
-    if (error != null){
+    if (error != null) {
         ErrorMessage(error = error)
     }
 }
-
