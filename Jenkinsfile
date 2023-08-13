@@ -4,14 +4,12 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                // Your build commands
                 sh './gradlew assembleDebug'
             }
         }
 
         stage('Test') {
             steps {
-                // Your test commands
                 sh './gradlew test'
             }
         }
@@ -22,19 +20,52 @@ pipeline {
             }
             post {
                 always {
-                    jacoco()
+                    jacoco(path: '**/build/jacoco/testDebugUnitTest.exec')
                 }
             }
         }
+
         stage('Static Code Analysis') {
             steps {
                  sh './gradlew ktlintCheck'
-                 }
-                    post {
-                        always {
-                            recordIssues tool: kotlin(name: 'ktlint'), pattern: 'app/build/reports/ktlint/ktlint*.txt' // Adjust the pattern according to your project structure
-                        }
-                    }
-                }
+            }
+        }
+
+        // CD stages start here
+
+        stage('Deliver') {
+            steps {
+                echo 'Releasing artifact...'
+                sh './gradlew assembleRelease'  // This assumes you have set up signing for release builds
+                archiveArtifacts artifacts: '**/build/outputs/apk/release/*.apk', allowEmptyArchive: true
+
+            }
+        }
+
+        stage('Deploy to Dev Env') {
+            steps {
+                echo 'Mock deploying artifact to Dev environment...'
+                sh 'mkdir -p "C:\\ProgramData\\Jenkins\\.jenkins\\jobs\\Patient App pipeline\\apk"'
+                sh 'cp **/build/outputs/apk/release/*.apk "C:\\ProgramData\\Jenkins\\.jenkins\\jobs\\Patient App pipeline\\apk"'
+            }
+        }
+
+        stage('Deploy to QAT Env') {
+            steps {
+                echo 'Mock deploying artifact to QAT environment...'
+            }
+        }
+
+        stage('Deploy to Staging Env') {
+            steps {
+                echo 'Mock deploying artifact to Staging environment...'
+            }
+        }
+
+        stage('Deploy to Production Env') {
+            steps {
+                echo 'Mock deploying artifact to Production environment...'
+            }
+        }
     }
 }
