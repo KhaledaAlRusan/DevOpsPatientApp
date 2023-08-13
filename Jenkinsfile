@@ -4,14 +4,12 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                // Your build commands
                 sh './gradlew assembleDebug'
             }
         }
 
         stage('Test') {
             steps {
-                // Your test commands
                 sh './gradlew test'
             }
         }
@@ -22,10 +20,11 @@ pipeline {
             }
             post {
                 always {
-                    jacoco()
+                    jacoco(path: '**/build/jacoco/testDebugUnitTest.exec')
                 }
             }
         }
+
         stage('Static Code Analysis') {
             steps {
                  sh './gradlew ktlintCheck'
@@ -36,6 +35,5 @@ pipeline {
                         }
                     }
                 }
-
     }
 }
