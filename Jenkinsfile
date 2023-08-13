@@ -23,7 +23,6 @@ pipeline {
                     jacoco(path: '**/build/jacoco/testDebugUnitTest.exec')
                 }
             }
-        
         }
 
         stage('Static Code Analysis') {
