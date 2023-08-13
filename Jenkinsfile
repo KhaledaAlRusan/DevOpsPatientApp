@@ -18,11 +18,7 @@ pipeline {
             steps {
                 sh './gradlew jacocoTestReport'
             }
-            post {
-                always {
-                    jacoco(path: '**/build/jacoco/testDebugUnitTest.exec')
-                }
-            }
+        
         }
 
         stage('Static Code Analysis') {
