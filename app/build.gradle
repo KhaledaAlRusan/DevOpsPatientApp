@@ -3,6 +3,7 @@ plugins {
     id 'org.jetbrains.kotlin.android'
     id 'kotlin-kapt'
     id 'com.google.dagger.hilt.android'
+    id 'jacoco'
 }
 
 android {
@@ -50,6 +51,9 @@ android {
         }
     }
 
+}
+jacoco {
+    version = '0.8.9'  // Check for the latest version
 }
 
 dependencies {
@@ -103,4 +107,13 @@ dependencies {
     implementation 'androidx.navigation:navigation-ui-ktx:2.5.3'
     implementation("androidx.hilt:hilt-navigation-fragment:1.0.0")
 
+}
+task jacocoTestReport(type: JacocoReport, dependsOn: ['testDebugUnitTest']) {
+    getSourceDirectories().setFrom(fileTree(dir: 'src/main/java'))
+    getClassDirectories().setFrom(fileTree(dir: 'build/intermediates/javac/debug', excludes: ['**/*$*.class']))
+
+    getExecutionData().setFrom(fileTree(dir: 'build', includes: [
+            'jacoco/testDebugUnitTest.exec',
+            'outputs/code-coverage/connected/*coverage.ec'
+    ]))
 }
