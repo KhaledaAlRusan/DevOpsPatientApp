@@ -16,6 +16,18 @@ pipeline {
             }
         }
 
+        stage('Coverage') {
+            steps {
+                sh './gradlew jacocoTestReport'
+            }
+            post {
+                always {
+                    jacoco()
+                }
+            }
+        }
+
+
         // Additional stages for coverage and static analysis will go here
     }
 }
