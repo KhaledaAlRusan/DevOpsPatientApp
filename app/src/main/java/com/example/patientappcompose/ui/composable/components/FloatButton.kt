@@ -18,21 +18,21 @@ import com.example.patientappcompose.ui.theme.brightGreen
 @Composable
 fun FloatButton(
     modifier: Modifier = Modifier,
-    onClick:() -> Unit
+    onClick: () -> Unit
 ) {
     Box(
         modifier = modifier.fillMaxSize().padding(32.dp),
         contentAlignment = Alignment.BottomEnd
-    ){
+    ) {
         FloatingActionButton(
             onClick = onClick,
             containerColor = brightGreen,
-            shape = RoundedCornerShape(16.dp),
+            shape = RoundedCornerShape(16.dp)
         ) {
             Icon(
                 imageVector = Icons.Rounded.Add,
                 contentDescription = "Add FAB",
-                tint = Color.White,
+                tint = Color.White
             )
         }
     }

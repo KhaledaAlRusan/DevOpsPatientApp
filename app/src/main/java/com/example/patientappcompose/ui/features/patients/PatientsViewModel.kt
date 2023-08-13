@@ -14,13 +14,12 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class PatientsViewModel @Inject constructor(private val repo: PatientRepo):ViewModel() {
+class PatientsViewModel @Inject constructor(private val repo: PatientRepo) : ViewModel() {
 
     var selectedPatientId by mutableStateOf<String?>(null)
 
     private val _patientMutableStateFlow: MutableStateFlow<List<PatientDataModel>> = MutableStateFlow(emptyList())
     val patientStateFlow = _patientMutableStateFlow.asStateFlow()
-
 
     private val _loadingMutableStateFlow: MutableStateFlow<Boolean> = MutableStateFlow(false)
     val loadingStateFlow = _loadingMutableStateFlow.asStateFlow()
@@ -28,23 +27,19 @@ class PatientsViewModel @Inject constructor(private val repo: PatientRepo):ViewM
     private val _errorMutableStateFlow: MutableStateFlow<Exception?> = MutableStateFlow(null)
     val errorStateFlow = _errorMutableStateFlow.asStateFlow()
 
-
     init {
         getPatients()
     }
 
-    fun getPatients(){
+    fun getPatients() {
         viewModelScope.launch {
             _loadingMutableStateFlow.emit(true)
             try {
                 _patientMutableStateFlow.emit(repo.getPatients())
-            }
-            catch (e:Exception)
-            {
+            } catch (e: Exception) {
                 _errorMutableStateFlow.emit(e)
             }
             _loadingMutableStateFlow.emit(false)
-
         }
     }
 }

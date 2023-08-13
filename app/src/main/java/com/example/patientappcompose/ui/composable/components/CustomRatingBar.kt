@@ -25,7 +25,6 @@ fun CustomRatingBar(
     rating: Float,
     spaceBetween: Dp = 0.dp
 ) {
-
     val image = ImageBitmap.imageResource(id = R.drawable.star)
     val imageFull = ImageBitmap.imageResource(id = R.drawable.star_full)
 
@@ -36,14 +35,14 @@ fun CustomRatingBar(
     val space = LocalDensity.current.run { spaceBetween.toPx() }
     val totalWidth = width * totalCount + spaceBetween * (totalCount - 1)
 
-
     Box(
         modifier
             .width(totalWidth)
             .height(height)
             .drawBehind {
                 drawRating(rating, image, imageFull, space)
-            })
+            }
+    )
 }
 
 private fun DrawScope.drawRating(
@@ -52,7 +51,6 @@ private fun DrawScope.drawRating(
     imageFull: ImageBitmap,
     space: Float
 ) {
-
     val totalCount = 5
 
     val imageWidth = image.width.toFloat()
@@ -62,7 +60,6 @@ private fun DrawScope.drawRating(
     val ratingInt = (rating - reminder).toInt()
 
     for (i in 0 until totalCount) {
-
         val start = imageWidth * i + space * i
 
         drawImage(

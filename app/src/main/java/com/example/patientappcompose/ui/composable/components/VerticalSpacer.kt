@@ -7,6 +7,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun VerticalSpacer(size:Int) {
+fun VerticalSpacer(size: Int) {
     Spacer(modifier = Modifier.height(size.dp))
 }

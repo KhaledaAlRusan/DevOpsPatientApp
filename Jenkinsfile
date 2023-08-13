@@ -24,5 +24,16 @@ pipeline {
                 }
             }
         }
+
+        stage('Static Code Analysis') {
+            steps {
+                 sh './gradlew ktlintCheck'
+                 }
+                    post {
+                        always {
+                            recordIssues tool: kotlin(name: 'ktlint'), pattern: 'app/build/reports/ktlint/ktlint*.txt' // Adjust the pattern according to your project structure
+                        }
+                    }
+                }
     }
 }

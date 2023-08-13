@@ -13,12 +13,11 @@ import javax.inject.Inject
 
 @HiltViewModel
 class AddPatientViewModel @Inject constructor(
-    private val repo: PatientRepo,
-): ViewModel() {
+    private val repo: PatientRepo
+) : ViewModel() {
 
     private val _addPatientsMutableStateFlow: MutableStateFlow<PatientDataModel?> = MutableStateFlow(null)
     val addPatientsStateFlow = _addPatientsMutableStateFlow.asStateFlow()
-
 
     private val _loadingMutableStateFlow: MutableStateFlow<Boolean> = MutableStateFlow(false)
     val loadingStateFlow = _loadingMutableStateFlow.asStateFlow()
@@ -26,19 +25,15 @@ class AddPatientViewModel @Inject constructor(
     private val _errorMutableStateFlow: MutableStateFlow<Exception?> = MutableStateFlow(null)
     val errorStateFlow = _errorMutableStateFlow.asStateFlow()
 
-
-    fun addPatient(addPatientModel: AddPatientModel){
+    fun addPatient(addPatientModel: AddPatientModel) {
         viewModelScope.launch {
             _loadingMutableStateFlow.emit(true)
             try {
                 _addPatientsMutableStateFlow.emit(repo.addPatient(addPatientModel))
-            }
-            catch (e:Exception)
-            {
+            } catch (e: Exception) {
                 _errorMutableStateFlow.emit(e)
             }
             _loadingMutableStateFlow.emit(false)
         }
     }
-
 }

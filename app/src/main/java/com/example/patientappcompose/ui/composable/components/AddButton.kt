@@ -10,12 +10,12 @@ import androidx.compose.ui.unit.dp
 
 @Composable
 fun AddButton(
-    valid:Boolean,
-    onClick:() -> Unit
+    valid: Boolean,
+    onClick: () -> Unit
 ) {
     Button(
-        onClick =  {
-            if(valid){
+        onClick = {
+            if (valid) {
                 onClick()
             }
         },

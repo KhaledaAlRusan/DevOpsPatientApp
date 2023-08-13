@@ -10,7 +10,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 
 @Composable
-fun ErrorMessage(error:Exception) {
+fun ErrorMessage(error: Exception) {
     Box(
         contentAlignment = Alignment.Center,
         modifier = Modifier.fillMaxSize()

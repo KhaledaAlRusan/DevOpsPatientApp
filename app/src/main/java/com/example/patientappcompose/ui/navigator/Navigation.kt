@@ -9,16 +9,16 @@ import com.example.patientappcompose.ui.screens.DetailPatientScreen
 import com.example.patientappcompose.ui.screens.PatientsScreen
 
 @Composable
-fun Navigation( ) {
+fun Navigation() {
     val navController = rememberNavController()
-    NavHost(navController = navController, startDestination = Screens.MainScreen.route){
-        composable(route = Screens.MainScreen.route){
-            PatientsScreen( navController = navController)
+    NavHost(navController = navController, startDestination = Screens.MainScreen.route) {
+        composable(route = Screens.MainScreen.route) {
+            PatientsScreen(navController = navController)
         }
-        composable(route = Screens.AddScreen.route){
+        composable(route = Screens.AddScreen.route) {
             AddPatientScreen(navController)
         }
-        composable(route = Screens.PatientDetailsScreen.route){backStackEntry ->
+        composable(route = Screens.PatientDetailsScreen.route) { backStackEntry ->
             // You can retrieve the patientId like this
             val patientId = backStackEntry.arguments?.getString("patientId")
             DetailPatientScreen(navController, patientId ?: "")
